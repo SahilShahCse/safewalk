@@ -11,7 +11,6 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(25),
       padding: EdgeInsets.all(25),
       decoration: BoxDecoration(
         color: Color(0xffEEE8F4),
@@ -20,7 +19,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Enter Time'),
+          const Text('Enter Time:',style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500 , fontSize: 16),),
           const SizedBox(
             height: 20,
           ),
