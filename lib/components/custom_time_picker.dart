@@ -26,22 +26,23 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         _showTimePicker();
       },
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(width: 0.5 , color: Colors.white)
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.access_time,
-              color: Colors.black,
+              size: 20,
+              color: Colors.white70,
             ),
             SizedBox(width: 8),
             Text(
               _formatTime(_selectedTime),
-              style: TextStyle(fontSize: 16 , fontWeight: FontWeight.w500 , color: Colors.black),
+              style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 14 , color: Colors.white70 ),
             ),
           ],
         ),

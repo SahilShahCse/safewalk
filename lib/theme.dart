@@ -7,7 +7,7 @@ ThemeData darkTheme = ThemeData(
     secondary: Colors.white,
   ),
   textTheme: TextTheme(
-    bodyLarge: TextStyle(fontWeight: FontWeight.bold , fontSize: 17 , color: Color(
+    bodyLarge: TextStyle(fontWeight: FontWeight.w400 , fontSize: 18 , color: Color(
         0xfff6f5f5)),
     bodyMedium: TextStyle(fontWeight: FontWeight.w500 , fontSize: 15 , color: Colors.white),
     bodySmall: TextStyle(fontWeight: FontWeight.w300 , fontSize: 12 , color: Colors.white),

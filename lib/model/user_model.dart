@@ -9,7 +9,7 @@ class UserModel {
   DateTime accountCreatedAt;
   List<String> sharedUsers;
   List<TimerModel> timers;
-  List<SharedModel> shared;
+  String sharedId;
 
   UserModel({
     required this.userId,
@@ -19,7 +19,7 @@ class UserModel {
     required this.password,
     required this.sharedUsers,
     required this.timers,
-    required this.shared,
+    required this.sharedId,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,7 +31,7 @@ class UserModel {
       'accountCreatedAt': accountCreatedAt.toIso8601String(),
       'sharedUsers': sharedUsers,
       'timers': timers.map((timer) => timer.toMap()).toList(),
-      'shared': shared.map((sharedModel) => sharedModel.toMap()).toList(),
+      'sharedId': sharedId,
     };
   }
 
@@ -45,8 +45,7 @@ class UserModel {
       sharedUsers: List<String>.from(map['sharedUsers']),
       timers: List<TimerModel>.from(
           map['timers'].map((x) => TimerModel.fromMap(x))),
-      shared: List<SharedModel>.from(
-          map['shared'].map((x) => SharedModel.fromMap(x))),
+      sharedId: map['sharedId'],
     );
   }
 }
@@ -59,5 +58,5 @@ UserModel user = UserModel(
   password: 'sahilshah',
   sharedUsers: [],
   timers: [],
-  shared: [],
+  sharedId: '01',
 );

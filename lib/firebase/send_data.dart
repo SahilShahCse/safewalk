@@ -16,5 +16,21 @@ class SendData{
     collectionReference.doc(userModel.userId).set(userModel.toMap());
   }
 
+  void setTimer(TimerModel timer) async {
+
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection('user'); // Update 'users' to match your collection name
+    String id = user.userId;
+    DocumentReference doc = collectionReference.doc(id);
+
+    DocumentSnapshot snapshot = await doc.get();
+    Map<String, dynamic> userData = snapshot.data() as Map<String, dynamic>;
+
+    List<dynamic> timersData = userData['timers'] ?? [];
+    timersData.add(timer.toMap());
+
+    userData['timers'] = timersData;
+    await doc.update(userData);
+  }
+
 
 }
