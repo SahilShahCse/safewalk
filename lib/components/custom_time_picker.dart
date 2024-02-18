@@ -1,103 +1,71 @@
 import 'package:flutter/material.dart';
 
 class CustomTimePicker extends StatefulWidget {
-  const CustomTimePicker({super.key});
+  final ValueChanged<TimeOfDay>? onChanged;
+
+  const CustomTimePicker({Key? key, this.onChanged}) : super(key: key);
 
   @override
-  State<CustomTimePicker> createState() => _CustomTimePickerState();
+  _CustomTimePickerState createState() => _CustomTimePickerState();
 }
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
+  late TimeOfDay _selectedTime;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with current time
+    _selectedTime = TimeOfDay.now();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(25),
-      decoration: BoxDecoration(
-        color: Color(0xffEEE8F4),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Enter Time:',style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500 , fontSize: 16),),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 120,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [myTextField(), SizedBox(height: 5), Text('Hour')],
-                ),
-              ),
-              const SizedBox(width: 10),
-              const Column(
-                children: [
-                  Text(
-                    ':',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
-                  ),
-                  SizedBox(height: 5),
-                  Text(''),
-                ],
-              ),
-              const SizedBox(width: 10),
-              SizedBox(
-                width: 120,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [myTextField(), SizedBox(height: 5),Text('Minute')],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding:  EdgeInsets.symmetric(horizontal: 10),
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Cancel' , style: TextStyle(color: Color(0xff6750A4), fontSize: 14 , fontWeight: FontWeight.w500),),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Text('OK' , style: TextStyle(color: Color(0xff6750A4), fontSize: 14 , fontWeight: FontWeight.w500),),
-              ),
-            ],
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        _showTimePicker();
+      },
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.access_time,
+              color: Colors.black,
+            ),
+            SizedBox(width: 8),
+            Text(
+              _formatTime(_selectedTime),
+              style: TextStyle(fontSize: 16 , fontWeight: FontWeight.w500 , color: Colors.black),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  myTextField() {
-    return TextField(
-      style: TextStyle(fontSize: 22),
-      textAlign: TextAlign.center,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Color(0xffE7E0EC),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          borderSide: BorderSide(color: Colors.transparent),
-        ),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            borderSide:
-                BorderSide(color: Color(0xffD1C1EB)) // Set the outline color
-            ),
-      ),
+  Future<void> _showTimePicker() async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
     );
+
+    if (pickedTime != null) {
+      setState(() {
+        _selectedTime = pickedTime;
+        widget.onChanged?.call(pickedTime);
+      });
+    }
+  }
+
+  String _formatTime(TimeOfDay time) {
+    String period = time.period == DayPeriod.am ? 'AM' : 'PM';
+    int hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
+    return '$hour:${time.minute.toString().padLeft(2, '0')} $period';
   }
 }

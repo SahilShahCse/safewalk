@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           _currentIndex = _pageController.page!.round();
           setState(() {});
         },
-        child: Center(child: Icon(icon , color: _currentIndex == pageIndex? Colors.orangeAccent : Colors.black,),),
+        child: Center(child: Icon(icon , color: _currentIndex == pageIndex? Colors.orangeAccent : Colors.white70,),),
       ),
     );
   }

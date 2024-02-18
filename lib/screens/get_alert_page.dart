@@ -12,46 +12,57 @@ class _GetAlertPageState extends State<GetAlertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .background,
         scrolledUnderElevation: 0,
         title: Text('Details'),
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-          return buildDetails();
-        },),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: _buildAlertDetails(context),
+        ),
       ),
     );
   }
 
-  Container buildDetails() {
-
+  Container _buildAlertDetails(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.only(bottom: 15 , left: 15 , right: 15),
-        decoration: BoxDecoration(
-          // color: Color(0xffD1C1EB),
-          border: Border(bottom: BorderSide()),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Note:' , style: TextStyle(fontSize: 16 , fontWeight: FontWeight.w500),),
-            SizedBox(height: 5),
-            Text('I\'ll be reaching soon , im at my school and heading straight towards home , see u ...'),
-            SizedBox(height: 20),
-            Text('Time:',style: TextStyle(fontSize: 16 , fontWeight: FontWeight.w500),),
-            SizedBox(height: 5),
-
-            Text('8:30 pm'),
-            SizedBox(height: 20),
-
-            Text('Sender: Ipshita',style: TextStyle(fontSize: 14 , fontWeight: FontWeight.w500),),
-
-
-          ],
-        ),
-      );
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(25),
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(),
+                        SizedBox(height: 5),
+                        Text('Sahil Shah', style: Theme.of(context).textTheme.bodyMedium,),
+                      ],
+                    ),
+                    SizedBox(width: 15),
+                    Expanded(child: Text('What if i have a very long note ? will it still look good or not ?')),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text('Arrival time\n2:50 AM', style: Theme.of(context).textTheme.bodyMedium,),
+                  SizedBox(width: 10),
+                ],
+              ),
+            ],
+          ),
+        );
   }
 }

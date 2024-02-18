@@ -1,3 +1,6 @@
+import 'package:safewalk/model/shared_model.dart';
+import 'package:safewalk/model/timerModel.dart';
+
 class UserModel {
   String userId;
   String userName;
@@ -5,6 +8,8 @@ class UserModel {
   String password;
   DateTime accountCreatedAt;
   List<String> sharedUsers;
+  List<TimerModel> timers;
+  List<SharedModel> shared;
 
   UserModel({
     required this.userId,
@@ -13,6 +18,8 @@ class UserModel {
     required this.accountCreatedAt,
     required this.password,
     required this.sharedUsers,
+    required this.timers,
+    required this.shared,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,7 +30,8 @@ class UserModel {
       'password': password,
       'accountCreatedAt': accountCreatedAt.toIso8601String(),
       'sharedUsers': sharedUsers,
-      // Add other fields as needed
+      'timers': timers.map((timer) => timer.toMap()).toList(),
+      'shared': shared.map((sharedModel) => sharedModel.toMap()).toList(),
     };
   }
 
@@ -35,6 +43,10 @@ class UserModel {
       password: map['password'],
       accountCreatedAt: DateTime.parse(map['accountCreatedAt']),
       sharedUsers: List<String>.from(map['sharedUsers']),
+      timers: List<TimerModel>.from(
+          map['timers'].map((x) => TimerModel.fromMap(x))),
+      shared: List<SharedModel>.from(
+          map['shared'].map((x) => SharedModel.fromMap(x))),
     );
   }
 }
@@ -46,4 +58,6 @@ UserModel user = UserModel(
   accountCreatedAt: DateTime.now(),
   password: 'sahilshah',
   sharedUsers: [],
+  timers: [],
+  shared: [],
 );

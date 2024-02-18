@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:safewalk/model/user_model.dart';
+import 'package:safewalk/screens/profile/set_guardian_page.dart';
 import 'package:safewalk/screens/profile/settings_page.dart';
+import 'package:safewalk/screens/profile/subscription_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -31,8 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
             getButton('Settings', () {
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>SettingsPage()));
             }),
-            getButton('Subscriptions', () { }),
-            getButton('SetGuardian', () { }),
+            getButton('Subscriptions', () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>SubscriptionPage()));
+            }),
+            getButton('SetGuardian', () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>SetGuardianPage()));
+            }),
           ],
         ),
       ),

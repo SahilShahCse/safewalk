@@ -4,6 +4,7 @@ import 'package:safewalk/firebase/send_data.dart';
 import 'package:safewalk/model/shared_model.dart';
 import 'package:safewalk/model/user_model.dart';
 import 'package:safewalk/screens/home_page.dart';
+import 'package:safewalk/theme.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,6 +17,7 @@ Future<void> main() async {
 
   runApp(
     MaterialApp(
+      theme: darkTheme,
       home: HomePage(),
     ),
   );
